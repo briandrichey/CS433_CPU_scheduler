@@ -12,7 +12,6 @@ void schedule_sjf::add(char* name, int priority, int burst){
 void schedule_sjf::sort( vector<task> &v ){
 	for(int i=v.begin(), i < v.end(), i++){
 		for(int j= v.begin()+1; j < v.end()-i; j++){
-			task temp2 = *(j);
 			if(temp1[j].burst > temp2[j+1].burst){
 				std::swap(v.at(j),v.at(j+1));
 			}
