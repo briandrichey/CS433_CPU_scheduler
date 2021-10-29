@@ -10,29 +10,14 @@ void schedule_sjf::add(char* name, int priority, int burst){
 
 //sort fxn for 
 void schedule_sjf::sort( vector<task> &v ){
-	int count = 0;
-	
-	for(auto i=v.begin(), i < v.size()-1, i++){
-		task temp1 = *(i);
-		for(auto j= v.begin()+1; j < v.size()-1; j++){
+	for(int i=v.begin(), i < v.end(), i++){
+		for(int j= v.begin()+1; j < v.end()-i; j++){
 			task temp2 = *(j);
 			if(temp1[j].burst > temp2[j+1].burst){
 				std::swap(v.at(j),v.at(j+1));
 			}
 		}
 	}
-		/**void bubbleSort(vector<T> &vec) {
-    for (size_t i = 0; i < vec.size() - 1; ++i) {
-        for (size_t j = 0; j < vec.size() - i - 1; ++j) {
-            if (vec.at(j) > vec.at(j + 1))
-                std::swap(vec.at(j), vec.at(j + 1));
-        }
-    }
-*/
-		
-	}
-	
-	
 }
 
 /**
