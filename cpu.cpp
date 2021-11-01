@@ -16,20 +16,40 @@ CPU::CPU() {
 }
 
 void CPU::displayAvgWait() {
-    double totalTime = 0.0;
-    for (int i = 0; i < scheduled_tasks.size(); i++) {
-        totalTime += waitTime[i];
+    double totalWaitTime = 0.0;
+    int w_count = 0;
+
+    for (int i = 0; i < MAX_PROCESS; i++) {
+        if (turnaroundTime[i] != 0) {
+            w_count++;
+
+        }
+        totalWaitTime += waitTime[i];
+        std::cout << totalWaitTime << '\n';
     }
-    std::cout << "Average wait time: " << std::fixed << std::setprecision(1) << totalTime/MAX_PROCESS << '\n';
+    std::cout << "Count: " << w_count << '\n';
+    std::cout << "Average wait time: " << std::fixed << std::setprecision(1) << totalWaitTime / w_count << '\n';
 }
 
-void CPU::displayUtilization(){
-    //activationTime = waitTime[MAX_PROCESS];
-    //std::cout << "Total CPU activation: " << activationTime << '\n';
+void CPU::displayWaitAndTurnaround(){
+
+    for (int i = 0; i < MAX_PROCESS; i++) {
+        if (turnaroundTime[i] != 0) {
+            std::cout << "T" << i + 1 << " waiting time: " << waitTime[i] << ", turnaround time: " << turnaroundTime[i] << '\n';
+        }
+       
+    }
 }
 
-void CPU::displayTurnaround(){
-
+void CPU::displayAvgTurnaround() {
+    double totalTime = 0.0;
+    int count = 0;
+    for (int i = 0; i < MAX_PROCESS; i++) {
+        if (turnaroundTime[i] != 0) {
+            count++;
+        }
+        totalTime += turnaroundTime[i];
+    }
+    std::cout << "Average turnaround time: " << std::fixed << std::setprecision(1) << totalTime / count << '\n';
 }
-
 

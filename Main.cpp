@@ -49,6 +49,7 @@ int main(int argc, char* argv[])
         priority = atoi(strsep(&temp, ","));
         burst = atoi(strsep(&temp, ","));
 
+        std::cout << name << " " << priority << " " << burst << '\n';
         
         // add the task to the scheduler's list of tasks
         master_scheduler.add(name, priority, burst);

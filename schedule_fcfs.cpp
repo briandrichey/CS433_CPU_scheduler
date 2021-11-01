@@ -14,16 +14,15 @@ void schedule_fcfs::schedule(){
 	int i = 0;
 	for (auto it = scheduled_tasks.begin(); it != scheduled_tasks.end(); it++) {
 		task temp = *(it);
-		std::cout << "Processing Task: " << temp.name << " " << temp.priority << " " << temp.burst << " " << '\n';
 		
-		//wait time for FCFS
+		//wait time and turn around time for FCFS
 		int prev_time = cpu_handle.waitTime[i];
+
+		cpu_handle.turnaroundTime[i] = temp.burst + prev_time;
 		cpu_handle.waitTime[++i] = temp.burst + prev_time;
 
-		cpu_handle.displayAvgWait();
-		cpu_handle.displayUtilization();	//the cpu activation time is = final node
 	}
-	//cpu_handle.displayAvgWait();
-	//cpu_handle.displayUtilization();	//the cpu activation time is = final node of waitTIme
-	
+	cpu_handle.displayWaitAndTurnaround();
+	cpu_handle.displayAvgWait();
+	cpu_handle.displayAvgTurnaround();	
 }
