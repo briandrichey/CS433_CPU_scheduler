@@ -1,7 +1,7 @@
 #include "schedule_sjf.h"
 
 
-// add a new task to the list of tasks
+// add a new task to the list of tasks within schedule_sjf.h
 void schedule_sjf::add(char* name, int priority, int burst) {
 	task temp;
 	temp.name = name, temp.priority = priority, temp.burst = burst;
@@ -9,8 +9,7 @@ void schedule_sjf::add(char* name, int priority, int burst) {
 }
 
 
-
-//sort fxn for 
+//sorts a vector of tasks by burst for SJF 
 void schedule_sjf::sort(std::vector<task>& v) {
 	for (int i = 0; i < v.size() - 1; i++) {
 		for (int j = 0; j < v.size() - i - 1; j++) {
@@ -21,9 +20,8 @@ void schedule_sjf::sort(std::vector<task>& v) {
 	}
 }
 
-/**
- * Run the SJF scheduler
- */
+
+//SJF schedule() function: sorts vector by ascending burst size
 void schedule_sjf::schedule() {
 	int i = 0;
 
@@ -31,16 +29,20 @@ void schedule_sjf::schedule() {
 
 	for (auto it = scheduled_tasks.begin(); it != scheduled_tasks.end(); it++) {
 		task temp = *(it);
-		//std::cout << "Processing Task: " << temp.name << " " << temp.priority << " " << temp.burst << " " << '\n';
-
-		//wait time for SJF
-
+		//times for sjf
 		int prev_time = cpu_handle.waitTime[i];
 		cpu_handle.turnaroundTime[i] = temp.burst + prev_time;
 		cpu_handle.waitTime[++i] = temp.burst + prev_time;
 
 	}
-	cpu_handle.displayWaitAndTurnaround();
+	
+	//doing a seperated printing section for sjf so it prints task name properly
+	i = 0;
+	for (auto it = scheduled_tasks.begin(); it != scheduled_tasks.end(); it++) {
+		task temp = *(it);
+		std::cout << temp.name << " waiting time: " << cpu_handle.waitTime[i] << ", turnaround time: " << cpu_handle.turnaroundTime[i] << '\n';
+		i++;
+	}
 	cpu_handle.displayAvgWait();
 	cpu_handle.displayAvgTurnaround();
 }

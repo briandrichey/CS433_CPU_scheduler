@@ -1,5 +1,5 @@
 /**
- * "Virtual" CPU that also maintains track of system time.
+ * "Virtual" CPU that maintains track of timing
  */
 
 #include <stdio.h>
@@ -8,10 +8,7 @@
 #include "cpu.h"
 
 CPU::CPU() {
-    waitTime[0] = 0;
-    activationTime = 0;
-    remainingTime = 0;
-    
+    waitTime[0] = 0;  
     //default const
 }
 
@@ -22,33 +19,28 @@ void CPU::displayAvgWait() {
     for (int i = 0; i < MAX_PROCESS; i++) {
         if (turnaroundTime[i] != 0) {
             w_count++;
-
+            totalWaitTime += waitTime[i];
         }
-        totalWaitTime += waitTime[i];
-        std::cout << totalWaitTime << '\n';
     }
-    std::cout << "Count: " << w_count << '\n';
     std::cout << "Average wait time: " << std::fixed << std::setprecision(1) << totalWaitTime / w_count << '\n';
 }
 
 void CPU::displayWaitAndTurnaround(){
-
     for (int i = 0; i < MAX_PROCESS; i++) {
         if (turnaroundTime[i] != 0) {
             std::cout << "T" << i + 1 << " waiting time: " << waitTime[i] << ", turnaround time: " << turnaroundTime[i] << '\n';
         }
-       
     }
 }
 
 void CPU::displayAvgTurnaround() {
     double totalTime = 0.0;
-    int count = 0;
+    int count = 0;          //non-zero elements in list
     for (int i = 0; i < MAX_PROCESS; i++) {
         if (turnaroundTime[i] != 0) {
             count++;
+            totalTime += turnaroundTime[i];         
         }
-        totalTime += turnaroundTime[i];
     }
     std::cout << "Average turnaround time: " << std::fixed << std::setprecision(1) << totalTime / count << '\n';
 }

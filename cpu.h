@@ -10,17 +10,15 @@
 class CPU {
 public:
 	int waitTime[MAX_PROCESS] = { 0 };
-	int activationTime;
 	int turnaroundTime[MAX_PROCESS] = { 0 };
-	int remainingTime;
+	int remainingTime[MAX_PROCESS] = { 0 };
+	int prevExits[MAX_PROCESS] = { 0 };
+	int prevExit = 0;	
 
 	void displayWaitAndTurnaround();
 	void displayAvgWait();
 	void displayAvgTurnaround();
 	
-
 	CPU();	//constructor
-	
 private:
-
 };

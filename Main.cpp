@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
     std::cout << "Date: 10/31/2021 [happy halloween!]" << std::endl;
     std::cout << "Course: CS433 (Operating Systems)" << std::endl;
     std::cout << "Description : CPU SCheduling Algorithm Simulation" << std::endl;
+    std::cout << "--------------------------------------------------" << std::endl;
     std::cout << '\n';
    
 
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
     }
 
     scheduler master_scheduler;
-
+    std::cout << "Tasks found in " << argv[1] << ":\n";
     while (fgets(task, SIZE, in) != NULL) {
         temp = strdup(task);
         name = strsep(&temp, ",");

@@ -33,7 +33,7 @@ void schedule_priority::schedule(){
 	int i = 0;
 	for (auto it = scheduled_tasks.begin(); it != scheduled_tasks.end(); it++) {
 		task temp = *(it);
-		std::cout << "Processing Task: " << temp.name << " " << temp.priority << " " << temp.burst << " " << '\n';
+		
 		//wait time and turn around time for PRIO
 		int prev_time = cpu_handle.waitTime[i];
 
